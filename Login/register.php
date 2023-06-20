@@ -1,4 +1,7 @@
 <?php
+$success = 0;
+$user = 0;
+
 
 if ($_SERVER['REQUEST_METHOD']=='POST') 
 {
@@ -17,14 +20,25 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     $breed = mysqli_real_escape_string($con,$_POST['breed']);
     $colmarks = mysqli_real_escape_string($con,$_POST['colmarks']);
 
-    $sql = "insert into `user` (client,username,email,password,phone,address,p_name,p_gender,species,p_bday,breed,colmarks) VALUES ('$client','$username','$email','$password','$phone','$address','$p_name','$p_gender','$species','$p_bday','$breed','$colmarks')";
-
-    $result = mysqli_query($con, $sql);
+    $sql = "select * from `user` where username = '$username'";
+    $result = mysqli_query($con,$sql);
 
     if ($result) {
-        echo "Registration Successful!";
-    } else {
-        die("Registration Failed!");
+        $num = mysqli_num_rows($result); //This function counts the number of rows inside the database
+        if ($num>0) {
+            $user=1; /* If the number of user is greater than 0 and that username is stored 2 times it will print this */ //passing variable name with value
+        } else {
+           /*This will insert data in the DB*/
+            $sql = "insert into `user` (client,username,email,password,phone,address,p_name,p_gender,species,p_bday,breed,colmarks) VALUES ('$client','$username','$email','$password','$phone','$address','$p_name','$p_gender','$species','$p_bday','$breed','$colmarks')";
+
+            $result = mysqli_query($con, $sql);
+
+            if ($result) {
+                $success=1; //passing variable name with value
+            } else {
+                die("Registration Failed!");
+            }
+        }
     }
 }
 
@@ -41,18 +55,37 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <!--FONTAWESOME-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+        <!--BOOSTRAP CDN-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <title>Pet Allies</title>
     </head>
 <body>
     <section class="container">
         <header>
             Registration Form
+            <?php
+                #This is an error alert
+                if ($user) {
+                    echo '<div class="alert alert-danger" role="alert">
+                        Username Already Exist!
+                    </div>';
+                }
+            ?>
+            <?php
+                #This is a success alert
+                if ($success) {
+                    echo '<div class="alert alert-success" role="alert">
+                    Registration Successful
+                  </div>';
+                }
+            ?>
         </header>
         <form action="register.php" class="form" method="POST">
             <!---------- Input Box  ---------->
             <div class="input-box">
-                <label>Clientname</label>
+                <label>Owner</label>
                 <input type="text" name="client" placeholder="Enter your full name" required>
             </div>
             <div class="input-box">
@@ -115,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                 </div>
             </div>
 
-            <label>Already Registered? <a href="login.php">Login</a></label>
+            <label >Already Registered? <a href="login.php">Login</a></label>
             <!--Submission-->
             <button type="submit" name="register_btn">Create Account</button>
         </form>
