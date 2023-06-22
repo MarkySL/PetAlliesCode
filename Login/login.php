@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
             $login = 1;
             session_start();
             $_SESSION['username'] = $username;
-            header("location:index.php");
+            header('location:index.php');
         } else {
            $invalid = 1;
         }
@@ -74,8 +74,9 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                 <input type="password" name="password" placeholder="Enter password">
             </div>
             <!---------- Submission Form -------->
-            <label>Don't have an account? <a href="register.php">Register here</a></label>
+            <label style="line-height:3.0;"><a href="#">Forgot password?</a></label>
             <button type="submit" name="login_btn">Login</button>
+            <label style="line-height: 2.0;">Don't have an account? <a href="register.php">Register here</a></label>
         </form>
     </section>
     <!--Resubmission Form Error-->

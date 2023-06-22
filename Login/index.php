@@ -1,7 +1,8 @@
 <?php
 session_start();
+#This set the program to only allow access to user who have created account
 if (!isset($_SESSION['username'])) {
-    header("location:login.php");
+    header('location:login.php');
 }
 ?>
 
@@ -22,7 +23,12 @@ if (!isset($_SESSION['username'])) {
     </head>
 <body>
     <center>
-        <h1>Hello Admin</h1>
+        <h1>Hello</h1> 
+        <?php 
+            #This prints username along with the html code
+            echo($_SESSION['username']);
+        ?>
+        <a href="logout.php" class="btn btn-primary">Logout</a>
     </center>
 </body>
 </html>
