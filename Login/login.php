@@ -1,3 +1,27 @@
+<?php
+
+if ($_SERVER['REQUEST_METHOD']=='POST') 
+{
+    include 'connection.php';
+    
+    $username = mysqli_real_escape_string($con, $_POST['username']);
+    $password = mysqli_real_escape_string($con, $_POST['password']);
+
+    $sql = "select * from `user` where username = '$username' and password ='$password'"; #This time we use the AND operator to check if both conditions are true
+    $result = mysqli_query($con,$sql);
+
+    if ($result) {
+        $num = mysqli_num_rows($result); //This function counts the number of rows inside the database
+        if ($num>0) {
+            echo "Login Successfully!";
+        } else {
+           echo "Invalid username or password";
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

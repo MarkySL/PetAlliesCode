@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     
     $client = mysqli_real_escape_string($con,$_POST['client']);
     $username = mysqli_real_escape_string($con, $_POST['username']);
-    $email = mysqli_real_escape_string($con, $_POST['email']);;
+    $email = mysqli_real_escape_string($con, $_POST['email']);
     $password = mysqli_real_escape_string($con, $_POST['password']);
     $phone = mysqli_real_escape_string($con, $_POST['phone']);
     $address = mysqli_real_escape_string($con, $_POST['address']);

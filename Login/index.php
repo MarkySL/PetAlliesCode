@@ -1,9 +1,3 @@
-<?php
-include 'dbcon.php';
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -20,30 +14,8 @@ include 'dbcon.php';
         <title>Pet Allies</title>
     </head>
 <body>
-    <section class="container">
-        <header>
-            Registration Form
-        </header>
-        <form action="login.php" class="form" method="POST">
-            <!---------- Login Form  ---------->
-            <div class="input-box">
-                <label>Username</label>
-                <input type="text" name="username" placeholder="Enter your username">
-            </div>
-            <div class="input-box">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Enter password">
-            </div>
-            <!---------- Submission Form -------->
-            <label>Don't have an account? <a href="register.php">Register here</a></label>
-            <button type="submit" name="login_btn">Login</button>
-        </form>
-    </section>
-    <!--Resubmission Form Error-->
-    <script>
-        if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-        }
-    </script>
+    <center>
+        <h1>Hello Admin</h1>
+    </center>
 </body>
 </html>
