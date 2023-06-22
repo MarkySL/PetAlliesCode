@@ -1,4 +1,6 @@
 <?php
+$login = 0;
+$invalid = 0;
 
 if ($_SERVER['REQUEST_METHOD']=='POST') 
 {
@@ -13,9 +15,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     if ($result) {
         $num = mysqli_num_rows($result); //This function counts the number of rows inside the database
         if ($num>0) {
-            echo "Login Successfully!";
+            $login = 1;
+            session_start();
+            $_SESSION['username'] = $username;
+            header("location:index.php");
         } else {
-           echo "Invalid username or password";
+           $invalid = 1;
         }
     }
 }
@@ -41,6 +46,22 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     <section class="container">
         <header>
             Registration Form
+            <?php
+                #This is a login success alert
+                if ($login) {
+                    echo '<div class="alert alert-success" role="alert">
+                    Login Successfully!
+                  </div>';
+                }
+            ?>
+            <?php
+                #This is an invalid login alert
+                if ($invalid) {
+                  echo '<div class="alert alert-danger" role="alert">
+                       Invalid Username or Password
+                    </div>';
+                }
+            ?>
         </header>
         <form action="login.php" class="form" method="POST">
             <!---------- Login Form  ---------->
