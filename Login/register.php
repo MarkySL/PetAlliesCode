@@ -19,6 +19,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     $p_bday = mysqli_real_escape_string($con,$_POST['p_bday']);
     $breed = mysqli_real_escape_string($con,$_POST['breed']);
     $colmarks = mysqli_real_escape_string($con,$_POST['colmarks']);
+    
 
     $sql = "select * from `user` where username = '$username'";
     $result = mysqli_query($con,$sql);
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
             $user=1; /* If the number of user is greater than 0 and that username is stored 2 times it will print this */ //passing variable name with value
         } else {
            /*This will insert data in the DB*/
-            $sql = "insert into `user` (client,username,email,password,phone,address,p_name,p_gender,species,p_bday,breed,colmarks) VALUES ('$client','$username','$email','$password','$phone','$address','$p_name','$p_gender','$species','$p_bday','$breed','$colmarks')";
+            $sql = "insert into `user` (client,username,email,password,phone,address,p_name,p_gender,species,p_bday,breed,colmarks,timestamp) VALUES ('$client','$username','$email','$password','$phone','$address','$p_name','$p_gender','$species','$p_bday','$breed','$colmarks',NOW())";
 
             $result = mysqli_query($con, $sql);
 
