@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
                 <input type="password" name="password" placeholder="Enter password">
             </div>
             <!---------- Submission Form -------->
-            <label style="line-height:3.0;"><a href="#">Forgot password?</a></label>
+            <a href="forgotpass.php">Forgot Password?</a>
             <button type="submit" name="login_btn">Login</button>
             <label style="line-height: 2.0;">Don't have an account? <a href="register.php">Register here</a></label>
         </form>

@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
             $user=1; /* If the number of user is greater than 0 and that username is stored 2 times it will print this */ //passing variable name with value
         } else {
            /*This will insert data in the DB*/
+           # timestamp variable for auto generation of time in the DB
             $sql = "insert into `user` (client,username,email,password,phone,address,p_name,p_gender,species,p_bday,breed,colmarks,timestamp) VALUES ('$client','$username','$email','$password','$phone','$address','$p_name','$p_gender','$species','$p_bday','$breed','$colmarks',NOW())";
 
             $result = mysqli_query($con, $sql);
